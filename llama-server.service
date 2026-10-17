@@ -1,0 +1,19 @@
+# /etc/systemd/system/llama-server.service
+[Unit]
+Description=llama.cpp server
+After=network.target
+
+[Service]
+Type=simple
+User=[username]
+WorkingDirectory=[llamacpp installation directory]
+ExecStart=[llama-server binary path] \
+  --models-preset [path to presets.ini] \
+  --models-max 1 \
+  --models-autoload \
+  --host 0.0.0.0 --port [port]
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
